@@ -22,6 +22,7 @@ export class Graph {
     g.node(0).label = 'n0';
     g.node(1).label = 'n1';
     g.node(2).label = 'n2';
+    console.log(g.V);
   };
 
     connected = (debug) => {
