@@ -25,8 +25,22 @@ export class Graph {
     g.node(2).label = 'n2';
   };
 
-  isTwoEdgeConnected = () => {
-    const g = this.graph;
+  isC222 = (g) => {
+    // if g is NOT Two Edge Connected return false
+    if (!this.isTwoEdgeConnected(g)) return false;
+    const adjList = g.adjList;
+    // Validate that there are not two adjacent vertices with deg > 2
+    for (let i = 0; i < g.V; i++) {
+      let isNotValid = adjList[i].reduce(
+        (acc, curr) => acc || adjList[curr].length > 2,
+        false,
+      );
+      if (isNotValid) return false;
+    }
+    return true;
+  };
+
+  isTwoEdgeConnected = (g) => {
     const cc = new jsgraphs.ConnectedComponents(g);
     if (cc.componentCount() > 1) return false;
     for (let i = 0; i < g.V; i++) {
