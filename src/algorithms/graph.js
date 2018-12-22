@@ -8,15 +8,14 @@ export class Graph {
   }
 
   main = (debug) => {
-    this.init();
     const g = this.graph;
+    this.init(g);
     if (debug) {
       debugger;
     }
   };
 
-  init = () => {
-    const g = this.graph;
+  init = (g) => {
     g.addEdge(0, 1);
     g.addEdge(0, 2);
     g.addEdge(1, 2);
