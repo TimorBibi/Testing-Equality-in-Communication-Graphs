@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "cytoscape": "^3.3.1",
+    "mathjs": "^5.4.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.1"
