@@ -6,22 +6,28 @@ export class Graph {
     this.graph = new jsgraphs.Graph(3);
   }
 
-  main = (debug) => {
-    this.init();
+  main = (debug, noOfNodes = 3) => {
+    this.init(noOfNodes);
     const g = this.graph;
     if (debug) {
       debugger;
     }
   };
 
-  init = () => {
+  init = (noOfNodes) => {
     const g = this.graph;
-    g.addEdge(0, 1);
-    g.addEdge(0, 2);
-    g.addEdge(1, 2);
-    g.node(0).label = 'n0';
-    g.node(1).label = 'n1';
-    g.node(2).label = 'n2';
-    console.log(g.V);
+
+    // init edges
+    for (let i = 0; i < noOfNodes; i++) {
+      for (let j = 0; j < noOfNodes; j++) {
+        if (i !== j && !g.edge(i, j)) {
+          g.addEdge(i, j);
+        }
+      }
+    }
+    // label nodes
+    for (let i = 0; i < noOfNodes; i++) {
+      g.node(i).label = `n${i}`;
+    }
   };
 }
