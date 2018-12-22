@@ -12,7 +12,10 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
+          <h1>Testing Equality in Communication Graphs</h1>
           <img src={logo} className="App-logo" alt="logo" />
+        </header>
+        <div className="main">
           <button onClick={() => this.Graph.main()}>Run App</button>
           <button
             onClick={() => {
@@ -20,7 +23,7 @@ class App extends Component {
             }}>
             Debug App
           </button>
-        </header>
+        </div>
       </div>
     );
   }

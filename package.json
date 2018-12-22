@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "cytoscape": "^3.3.1",
+    "js-graph-algorithms": "^1.0.18",
     "mathjs": "^5.4.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
