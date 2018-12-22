@@ -65,10 +65,9 @@ export class Graph {
     g.adjList[r].splice(lIndex, 1);
   };
 
-  connected = (debug) => {
+  isConnected = (g) => {
     const g = this.graph;
     let componnets = new jsgraphs.ConnectedComponents(g);
-    if (debug) debugger;
     return componnets.count === 1;
   };
 
