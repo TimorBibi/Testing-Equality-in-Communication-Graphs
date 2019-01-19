@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { Button, Checkbox, Form } from "semantic-ui-react";
+import React, { Component } from 'react';
+import { Button, Form } from 'semantic-ui-react';
 
 class GraphBuilder extends Component {
   constructor(props) {
     super();
 
     this.state = {
-      noOfVertices: 0
+      noOfVertices: 0,
     };
   }
 
-  handleNoOfVertices = e => {
+  handleNoOfVertices = (e) => {
     const value = NaN ? 0 : parseInt(e.target.value);
     this.setState({ noOfVertices: value });
   };
@@ -26,15 +26,14 @@ class GraphBuilder extends Component {
             type="number"
             name="noOfVertices"
             className="col-2"
-            onChange={e => this.handleNoOfVertices(e)}
+            onChange={(e) => this.handleNoOfVertices(e)}
           />
         </Form.Field>
         <Button
           onClick={() => {
             onSubmit(this.state.noOfVertices);
           }}
-          type="submit"
-        >
+          type="submit">
           Set
         </Button>
       </Form>
