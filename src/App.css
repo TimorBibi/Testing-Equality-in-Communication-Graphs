@@ -18,14 +18,37 @@
   color: white;
 }
 
-button {
-  height: 100px;
-  width: 200px;
+.btn {
   margin: 20px;
-  font-size: x-large;
-  font-weight: 600;
+  grid-area: 'btn';
 }
 
+.main {
+  display: flex;
+  flex-direction: row;
+}
+
+.container {
+  display: grid;
+  grid-template-areas:
+    'graph-builder'
+    'btn'
+    'graph';
+  grid-row: 3;
+}
+
+#cy {
+  grid-area: 'graph';
+}
+.graph {
+  border: 1px solid red;
+  min-width: 300px;
+  min-height: 500px;
+}
+
+.graph-builder {
+  grid-area: 'graph-builder';
+}
 .App-link {
   color: #61dafb;
 }

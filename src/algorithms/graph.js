@@ -65,7 +65,6 @@ export class Graph {
   };
 
   isConnected = (g) => {
-    const g = this.graph;
     let componnets = new jsgraphs.ConnectedComponents(g);
     return componnets.count === 1;
   };
