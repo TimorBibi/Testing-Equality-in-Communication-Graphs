@@ -1,7 +1,10 @@
 .App {
   text-align: center;
-  background-color: #282c34;
+
   height: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .App-logo {
@@ -15,16 +18,16 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
 
-button {
+/* button {
   height: 100px;
   width: 200px;
   margin: 20px;
   font-size: x-large;
   font-weight: 600;
-}
+} */
 
 .App-link {
   color: #61dafb;
