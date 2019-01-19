@@ -1,30 +1,25 @@
-import jsgraphs from 'js-graph-algorithms';
-import math from 'mathjs';
-import _ from 'lodash';
+import jsgraphs from "js-graph-algorithms";
+import math from "mathjs";
+import _ from "lodash";
 
 export class Graph {
-  constructor(noOfNodes = 3) {
-    this.graph = new jsgraphs.Graph(noOfNodes);
-  }
+  main = adj => {
+    this.graph = new jsgraphs.Graph(adj.length);
+    this.init(this.graph, adj);
+  };
 
-  main = (debug) => {
-    const g = this.graph;
-    this.init(g);
-    if (debug) {
-      debugger;
+  init = (g, adj) => {
+    adj.map((el, i) =>
+      el.map((el2, j) => (el2 === true && i < j ? g.addEdge(i, j) : undefined))
+    );
+    for (var i = 0; i < g.V; i++) {
+      g.node(i).label = `${i}`;
     }
   };
 
-  init = (g) => {
-    g.addEdge(0, 1);
-    g.addEdge(0, 2);
-    g.addEdge(1, 2);
-    g.node(0).label = 'n0';
-    g.node(1).label = 'n1';
-    g.node(2).label = 'n2';
-  };
+  getGraph = () => this.graph;
 
-  isC222 = (g) => {
+  isC222 = g => {
     // if g is NOT Two Edge Connected return false
     if (!this.isTwoEdgeConnected(g)) return false;
     const adjList = g.adjList;
@@ -32,14 +27,14 @@ export class Graph {
     for (let i = 0; i < g.V; i++) {
       let isNotValid = adjList[i].reduce(
         (acc, curr) => acc || adjList[curr].length > 2,
-        false,
+        false
       );
       if (isNotValid) return false;
     }
     return true;
   };
 
-  isTwoEdgeConnected = (g) => {
+  isTwoEdgeConnected = g => {
     const cc = new jsgraphs.ConnectedComponents(g);
     if (cc.componentCount() > 1) return false;
     for (let i = 0; i < g.V; i++) {
@@ -55,7 +50,7 @@ export class Graph {
     return true;
   };
 
-  cloneGraph = (g) => _.cloneDeep(g);
+  cloneGraph = g => _.cloneDeep(g);
 
   removeEdge = (g, l, r) => {
     const rIndex = g.adjList[l].indexOf(r);
@@ -64,7 +59,7 @@ export class Graph {
     g.adjList[r].splice(lIndex, 1);
   };
 
-  isConnected = (g) => {
+  isConnected = g => {
     let componnets = new jsgraphs.ConnectedComponents(g);
     return componnets.count === 1;
   };
@@ -116,8 +111,8 @@ export class Graph {
         }
       }
     }
-    var color0Arr = colorArr.filter((color) => color === 0);
-    var color1Arr = colorArr.filter((color) => color === 1);
+    var color0Arr = colorArr.filter(color => color === 0);
+    var color1Arr = colorArr.filter(color => color === 1);
     return Math.max(color0Arr.length, color1Arr.length);
   };
 }
