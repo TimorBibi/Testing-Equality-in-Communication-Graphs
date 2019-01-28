@@ -14,7 +14,7 @@
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.1",
     "semantic-ui-react": "^0.84.0",
-    "valuelink": "^1.5.5"
+    "valuelink": "^1.5.5",
     "reactstrap": "^6.5.0"
   },
   "scripts": {
