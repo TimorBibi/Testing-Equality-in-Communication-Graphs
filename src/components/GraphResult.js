@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Message, Button } from 'semantic-ui-react';
+import { Button, List } from 'semantic-ui-react';
 
 class GraphResult extends Component {
   constructor(props) {
@@ -12,29 +12,36 @@ class GraphResult extends Component {
     };
   }
 
-  createMessage = (valid) => {
-    const upperBound = this.state.bounds.upper;
-    const lowerBound = this.state.bounds.lower;
-    let content = valid
-      ? lowerBound.toString() + ' <= f(G) <= ' + upperBound
-      : 'This graph is not connected';
-    return valid ? (
-      <React.Fragment>
-        <p>f(G) upper and lower bounds:</p>
-        <p>{content}</p>{' '}
-      </React.Fragment>
-    ) : (
-      <p>{content}</p>
+  createBoundsList = () => {
+    const { bounds } = this.state;
+    let labels = Object.keys(bounds).map((label) => label + ' graph:');
+    let values = Object.values(bounds).map((val) =>
+      val === 'false' ? val : 'f(G) <= ' + val,
     );
+    if (bounds['Final limit'] === Infinity)
+      values[values.lenght - 1] = 'The graph is not connected';
+    return values.map((val, indx) => {
+      return (
+        <List.Content key={`Lcontent ${indx}`} className="listCon">
+          <List.Header key={`Lhead ${indx}`} className="listHead">
+            <h3>{labels[indx]}</h3>
+          </List.Header>
+          <List.Description key={`Ldes ${indx}`} className="listDesc">
+            {val}
+          </List.Description>
+        </List.Content>
+      );
+    });
   };
 
   render() {
     const { onReset } = this.props;
-    let valid = this.state.bounds.upper !== Infinity;
-    let content = this.createMessage(valid);
-    let style = valid ? 'blue' : 'red';
+    let listItems = this.createBoundsList();
     return (
-      <div className="result">
+      <div className="results">
+        <List divided relaxed>
+          {listItems}
+        </List>
         <Button
           onClick={() => {
             onReset();
@@ -42,7 +49,6 @@ class GraphResult extends Component {
           type="submit">
           Reset Graph
         </Button>
-        <Message color={style}>{content}</Message>
       </div>
     );
   }

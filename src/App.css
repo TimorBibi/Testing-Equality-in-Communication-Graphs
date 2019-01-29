@@ -50,7 +50,23 @@
 .App-link {
   color: #61dafb;
 }
-
+.results {
+  display: grid;
+  position: absolute;
+  left: 20px;
+  top: 200px;
+}
+.listCon {
+  margin: 10px;
+}
+.listHead {
+  color: darkblue;
+}
+.listDesc {
+  font-size: 18px;
+  font-weight: 400;
+  margin: 5px;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

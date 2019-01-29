@@ -21,25 +21,42 @@ export class Graph {
 
   getGraph = () => this.graph;
   getBounds = () => {
-    return { upper: this.upperBound, lower: this.lowerBound };
+    return this.boundsResult;
   };
 
   evalBounds = (g) => {
     const verts = g.V;
     const edges = this.noOfEdges;
     let upper = Infinity;
-    let lower = 0;
+    let connected = 'false';
+    let hemilton = 'false';
+    let bipartite = 'false';
+    let c222 = 'false';
 
     if (this.isConnected(g)) {
-      upper = verts - 1;
-      // lower = this.fc(g); need to implement
+      connected = verts - 1;
+      upper = connected;
       let coloredSize = this.isBipartite(g, 0);
-      if (this.isHemilton(g)) upper = math.min(upper, verts / 2);
-      if (coloredSize != -1) upper = math.min(upper, coloredSize);
-      if (this.isC222(g)) upper = math.min(upper, edges / 2);
+      if (this.isHemilton(g)) {
+        hemilton = verts / 2;
+        upper = math.min(upper, hemilton);
+      }
+      if (coloredSize !== -1) {
+        bipartite = coloredSize;
+        upper = math.min(upper, bipartite);
+      }
+      if (this.isC222(g)) {
+        c222 = edges / 2;
+        upper = math.min(upper, c222);
+      }
     }
-    this.upperBound = upper;
-    this.lowerBound = lower;
+    this.boundsResult = {
+      'Connected': connected,
+      'Hamiltonian': hemilton,
+      'Bipartite': bipartite,
+      'c222': c222,
+      'Final limit': upper
+    };
   };
 
   isC222 = (g) => {
