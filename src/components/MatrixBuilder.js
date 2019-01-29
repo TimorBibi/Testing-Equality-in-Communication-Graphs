@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { Button } from "semantic-ui-react";
+import React, { Component } from 'react';
+import { Button } from 'semantic-ui-react';
 
 class MatrixBuilder extends Component {
   state = {
     vertices: [],
-    adj: []
+    adj: [],
   };
 
   componentDidMount() {
@@ -19,7 +19,7 @@ class MatrixBuilder extends Component {
     }
   }
 
-  init = noOfVertices => {
+  init = (noOfVertices) => {
     let vertices = [],
       adj = [];
     for (var i = 0; i < noOfVertices; i++) {
@@ -28,6 +28,7 @@ class MatrixBuilder extends Component {
     vertices.map((el, i) => {
       adj.push([]);
       vertices.map((el, j) => (adj[i][j] = false));
+      return i;
     });
 
     this.setState({ adj, vertices });
@@ -48,7 +49,7 @@ class MatrixBuilder extends Component {
 
     return (
       <div className="matrix">
-        <table className="table" style={{ width: "50%" }}>
+        <table className="table" style={{ width: '50%' }}>
           <thead>
             <tr>
               {isActive && <th>#</th>}
@@ -80,8 +81,7 @@ class MatrixBuilder extends Component {
             onClick={() => {
               onSubmit(this.state.adj);
             }}
-            type="submit"
-          >
+            type="submit">
             Create Graph
           </Button>
         )}

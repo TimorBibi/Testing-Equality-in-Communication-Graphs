@@ -51,11 +51,11 @@ export class Graph {
       }
     }
     this.boundsResult = {
-      'Connected': connected,
-      'Hamiltonian': hemilton,
-      'Bipartite': bipartite,
-      'c222': c222,
-      'Final limit': upper
+      Connected: connected,
+      Hamiltonian: hemilton,
+      Bipartite: bipartite,
+      c222: c222,
+      'Final limit': upper,
     };
   };
 
@@ -110,8 +110,9 @@ export class Graph {
     // The value '-1' of colorArr[i] is used to indicate  that no color is assigned to vertex 'i'.
     // The value 1 is  used to indicate first color is assigned and value 0 indicates  second color is assigned.
     var colorArr = [];
-    graph.adjList.map(function(v) {
+    graph.adjList.map((v) => {
       colorArr.push(-1);
+      return v;
     });
 
     // Assign first color to source

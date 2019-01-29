@@ -10,11 +10,11 @@ class GraphComponent extends Component {
     for (var v = 0; v < graph.V; v++) {
       let adj_v = graph.adj(v);
 
-      for (var i = 0; i < adj_v.length; ++i) {
-        let w = adj_v[i];
+      for (var j = 0; j < adj_v.length; ++j) {
+        let w = adj_v[j];
         if (w > v) continue; // make sure only one edge between w and v since the graph is undirected
         markup.push(
-          <Edge key={`edge ${v},${i}`} id={`${v},${i}`} from={v} to={i} />,
+          <Edge key={`edge ${v},${w}`} id={`${v},${w}`} from={v} to={w} />,
         );
       }
     }
