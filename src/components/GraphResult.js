@@ -34,6 +34,16 @@ class GraphResult extends Component {
     });
   };
 
+  onSave = () => {
+    const { graph, bounds } = this.state;
+    console.log(
+      JSON.stringify({
+        adjList: graph.adjList,
+        ...bounds,
+      }),
+    );
+  };
+
   render() {
     const { onReset } = this.props;
     let listItems = this.createBoundsList();
@@ -48,6 +58,13 @@ class GraphResult extends Component {
           }}
           type="submit">
           Reset Graph
+        </Button>
+        <Button
+          onClick={() => {
+            this.onSave();
+          }}
+          type="submit">
+          Save Graph
         </Button>
       </div>
     );
