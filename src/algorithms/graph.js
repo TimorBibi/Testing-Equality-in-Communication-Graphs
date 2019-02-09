@@ -227,3 +227,11 @@ export class Graph {
     return g.adjList.reduce(reducer, false);
   };
 }
+
+let getGraphProps = (adj) => {
+  let v = adj.length;
+  let e = 0;
+  for (let i = 0; i < v; i++) e = e + adj[i].length;
+  e = e / 2;
+  console.log('The num of vertices is:' + v + '\n The num of edges is:' + e);
+};
