@@ -180,7 +180,7 @@
       "prob": 0.25
     }
   ],
-  "peterson graph": {
+  "petersen graph": {
     "adjList": [
       [2, 3, 5],
       [3, 4, 6],
