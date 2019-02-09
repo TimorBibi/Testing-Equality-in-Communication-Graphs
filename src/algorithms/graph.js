@@ -1,11 +1,19 @@
 import jsgraphs from 'js-graph-algorithms';
 import math from 'mathjs';
 import _ from 'lodash';
+import { graphTypes } from '../App';
 
 export class Graph {
-  main = (adj) => {
-    this.graph = new jsgraphs.Graph(adj.length);
-    this.init(this.graph, adj);
+  main = (payload) => {
+    switch (payload.type) {
+      case graphTypes.RANDOM:
+        this.graph = new jsgraphs.Graph(payload.noOfVertices);
+        this.createPGraph(this.graph, payload.p);
+        break;
+      default:
+        this.graph = new jsgraphs.Graph(payload.adjTable.length);
+        this.init(this.graph, payload.adjTable);
+    }
     this.noOfEdges = Object.keys(this.graph.edges).length;
     this.evalBounds(this.graph);
   };
@@ -22,6 +30,14 @@ export class Graph {
   getGraph = () => this.graph;
   getBounds = () => {
     return this.boundsResult;
+  };
+
+  createPGraph = (g, p) => {
+    for (let i = 0; i < g.V; i++) {
+      for (let j = i + 1; j < g.V; j++) {
+        if (Math.random() <= p) g.addEdge(i, j);
+      }
+    }
   };
 
   evalBounds = (g) => {

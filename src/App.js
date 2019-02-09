@@ -6,6 +6,11 @@ import GraphBuilder from './components/GraphBuilder';
 import MatrixBuilder from './components/MatrixBuilder';
 import GraphResult from './components/GraphResult';
 
+export const graphTypes = {
+  CUSTOM: 'custom',
+  RANDOM: 'random',
+};
+
 class App extends Component {
   constructor() {
     super();
@@ -14,12 +19,23 @@ class App extends Component {
       noOfVertices: 0,
       isGraphReady: false,
     };
+    window.graph = this.Graph.getGraph();
   }
 
+  setGraph = (payload) => {
+    switch (payload.type) {
+      case graphTypes.RANDOM:
+        this.Graph.main(payload);
+        this.setState({ isGraphReady: true });
+        break;
+      default:
+        this.crateTable(payload.noOfVertices);
+    }
+  };
   crateTable = (noOfVertices) => this.setState({ noOfVertices });
 
   createGraph = (adjTable) => {
-    this.Graph.main(adjTable);
+    this.Graph.main({ adjTable });
     this.setState({ isGraphReady: true });
   };
 
@@ -36,7 +52,9 @@ class App extends Component {
           <React.Fragment>
             <GraphBuilder
               handleNoOfVertices={(e) => this.handleNoOfVertices(e)}
-              onSubmit={(noOfVertices) => this.crateTable(noOfVertices)}
+              onSubmit={(type, noOfVertices, p) =>
+                this.setGraph({ type, noOfVertices, p })
+              }
             />
             <MatrixBuilder
               noOfVertices={noOfVertices}
