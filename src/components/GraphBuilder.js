@@ -7,24 +7,29 @@ class GraphBuilder extends Component {
     super();
 
     this.state = {
-      noOfVertices: 0,
+      noOfVertices: 1,
       probability: 1,
     };
   }
   // handleSetGraph = (type, )
 
   handleNoOfVertices = (e) => {
-    const value = NaN ? 0 : parseInt(e.target.value);
+    const inputValue = e.target.value;
+    const value = inputValue === '' ? 0 : parseInt(inputValue);
     this.setState({ noOfVertices: value });
   };
 
   handleProbability = (e) => {
-    const value = NaN ? 0 : parseFloat(e.target.value);
+    const inputValue = e.target.value;
+    const value =
+      inputValue === '' ? 0 : inputValue > 1 ? 1 : parseFloat(inputValue);
     this.setState({ probability: value });
   };
 
   render() {
     const { onSubmit } = this.props;
+    const { probability, noOfVertices } = this.state;
+
     return (
       <Form>
         <h2>Generate random graph</h2>
@@ -32,30 +37,29 @@ class GraphBuilder extends Component {
           <label>Enter number of vertices:</label>
           <input
             id="noOfVerticesRandom"
-            type="number"
+            type="text"
+            range="0-9"
             name="noOfVertices"
+            value={noOfVertices}
             className="col-2"
             onChange={(e) => this.handleNoOfVertices(e)}
           />
         </Form.Field>
         <Form.Field>
-          <label>Enter probability:</label>
+          <label>Enter probability [0,1]:</label>
           <input
             id="probabilityRandom"
             type="number"
             step="0.01"
             name="probabilityRandom"
+            value={probability}
             className="col-2"
             onChange={(e) => this.handleProbability(e)}
           />
         </Form.Field>
         <Button
           onClick={() => {
-            onSubmit(
-              graphTypes.RANDOM,
-              this.state.noOfVertices,
-              this.state.probability,
-            );
+            onSubmit(graphTypes.RANDOM, noOfVertices, probability);
           }}
           type="submit">
           Set
@@ -67,13 +71,14 @@ class GraphBuilder extends Component {
             id="noOfVertices"
             type="number"
             name="noOfVertices"
+            value={noOfVertices}
             className="col-2"
             onChange={(e) => this.handleNoOfVertices(e)}
           />
         </Form.Field>
         <Button
           onClick={() => {
-            onSubmit(graphTypes.CUSTOM, this.state.noOfVertices, undefined);
+            onSubmit(graphTypes.CUSTOM, noOfVertices, undefined);
           }}
           type="submit">
           Set

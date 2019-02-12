@@ -33,9 +33,11 @@ export class Graph {
   };
 
   createPGraph = (g, p) => {
+    debugger;
     for (let i = 0; i < g.V; i++) {
       for (let j = i + 1; j < g.V; j++) {
-        if (Math.random() <= p) g.addEdge(i, j);
+        let rand = Math.random();
+        if (rand <= p) g.addEdge(i, j);
       }
     }
   };
